@@ -1,0 +1,4 @@
+Question: Which file has the approval of a genetic test for Spinal Muscular Atrophy?
+
+Answer:
+The file that has the approval of a genetic test for Spinal Muscular Atrophy is "PA_DECISION  13050852 INDEPENDENT HEALTH HORIZON HF.md."

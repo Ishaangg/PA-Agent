@@ -1,0 +1,18 @@
+| Payor Name                     | CPT Code | Description                                                           | PA Status |
+|--------------------------------|----------|-----------------------------------------------------------------------|-----------|
+| NALC Health Benefit Plan       | 81161    | -                                                                     | Denied    |
+| NALC Health Benefit Plan       | 81200    | -                                                                     | Denied    |
+| NALC Health Benefit Plan       | 81243    | -                                                                     | Denied    |
+| NALC Health Benefit Plan       | 81251    | -                                                                     | Denied    |
+| NALC Health Benefit Plan       | 81255    | -                                                                     | Denied    |
+| NALC Health Benefit Plan       | 81260    | -                                                                     | Denied    |
+| NALC Health Benefit Plan       | 81400    | -                                                                     | Denied    |
+| NALC Health Benefit Plan       | 81401    | -                                                                     | Denied    |
+| NALC Health Benefit Plan       | 81405    | -                                                                     | Denied    |
+| NALC Health Benefit Plan       | 81408    | -                                                                     | Denied    |
+| NALC Health Benefit Plan       | 81220    | -                                                                     | Approved  |
+| NALC Health Benefit Plan       | 81257    | -                                                                     | Approved  |
+| NALC Health Benefit Plan       | 81329    | -                                                                     | Approved  |
+| NALC Health Benefit Plan       | 81361    | -                                                                     | Approved  |
+| NALC Health Benefit Plan       | 81420    | -                                                                     | Approved  |
+| Independent Health             | 0340U    | ONCOLOGY (PAN-CANCER), ANALYSIS OF MINIMAL RESIDUAL DISEASE (MRD) FROM PLASMA, WITH ASSAYS PERSONALIZED TO EACH PATIENT | Denied    |

@@ -3,5 +3,5 @@ content_rag_chat_task:
     Process PDF and Markdown documents from the specified {folder_path} once and answer the {question} directly based on their content. Use the Content RAG Tool only once per question to get a complete answer.
   expected_output: >
     A focused answer to the provided question based solely on the PDF and Markdown documents. Your answer should be concise and directly address the question.
-  agent: rag_chat_agent
+  agent: knowledge_base_agent
 

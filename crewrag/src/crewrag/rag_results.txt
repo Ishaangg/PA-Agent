@@ -1,0 +1,47 @@
+The prior authorization (PA) policy documents outline the following requirements and procedures:
+
+### Requirements for Medical Records:
+1. **Member and/or Patient Information:**
+   - Prior Authorization Reference Number
+   - Name
+   - ID number
+   - Date of birth
+   - Sex
+
+2. **Ordering Provider Information:**
+   - Identification number
+   - Name
+   - Address
+   - Telephone number
+   - Date(s) of service
+
+3. **Medical Records:**
+   - Physician progress notes explaining the need for testing
+   - Letter of medical necessity
+   - Laboratory requisition form including:
+     - Patient's name
+     - Date of birth
+     - ICD-10 codes (diagnosis codes)
+     - Specific tests ordered with corresponding CPT code
+   - If applicable:
+     - Genetics evaluation documentation
+     - Completed genetic testing recommendation form
+     - Three-generation pedigree
+
+### Submission Options for Medical Records Documentation:
+1. **Secure Fax:** Send records to (868) 392-7930.
+2. **Secure Portal:** Upload records at www.submitrecords.com using the NALC client identifier NALCDC51.
+3. **Mail:** Send records to Cotiviti at the specified address.
+
+### Appeal Process for Denied Authorizations:
+1. **Written Appeal Submission:** Must be submitted within 180 calendar days from receipt of denial.
+2. **Grounds for Appeal:** The appeal must specify the reasons for challenging the denial and include supporting medical records.
+3. **Notification:** The provider will be notified of the appeal decision within 30 calendar days of receipt.
+
+### Important Notes:
+- Authorizations are valid for 90 days from the authorization date.
+- The review is limited to medical necessity and does not guarantee payment of benefits.
+- Providers must pre-authorize procedures to avoid denial of payment.
+
+### Contact Information:
+- For questions regarding authorization, providers can contact Independent Health's Utilization Review Department or other relevant departments as specified.

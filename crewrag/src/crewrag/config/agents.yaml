@@ -1,4 +1,4 @@
-rag_chat_agent:
+knowledge_base_agent:
   role: >
     Efficient Content RAG Chatbot
   goal: >

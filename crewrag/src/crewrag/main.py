@@ -8,7 +8,14 @@ import logging
 import json
 
 # Set up logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("content_bot.log"),
+        logging.StreamHandler()
+    ]
+)
 logger = logging.getLogger("ContentBot")
 
 # Suppress SyntaxWarning from pysbd module
@@ -36,86 +43,100 @@ def run():
         # Create just one crew instance for the entire session
         crew_instance = ContentRAGCrew().crew()
         
-        print("\n=== Enhanced Content RAG Chatbot ===")
-        print("This bot can process both PDF and Markdown files.")
-        print("Type 'exit' to quit, 'files' to list available files.")
-        print("For best results with data extraction, ask questions like:")
-        print(" - 'What are all the payor names and PA statuses across all files?'")
-        print(" - 'Extract all CPT codes and their PA status from all documents'\n")
+        print("\n=== Enhanced Content RAG Chatbot with Discrete Tools ===")
+        print("This bot processes both PDF and Markdown files using specialized tools.")
+        print("Available commands:")
+        print("  'list' - List all files in the directory")
+        print("  'process' - Process all files in the directory")
+        print("  'extract [type]' - Extract structured data (payor, pa_status, cpt_codes, or all)")
+        print("  'exit' - Exit the program")
+        print("  Any other input will be treated as a question to answer\n")
         
-        # Conversation context
-        conversation_history = []
+        # Flag to track if files have been processed
+        files_processed = False
         
         while True:
             try:
-                question = input("\nYour question: ")
+                user_input = input("\nEnter command or question: ").strip()
                 
                 # Handle special commands
-                if question.lower() == 'exit':
+                if user_input.lower() == 'exit':
                     print("Goodbye!")
                     break
-                elif question.lower() in ['files', 'list files', 'show files']:
-                    # Special command to list files
-                    files_question = "What files are available?"
+                    
+                elif user_input.lower() == 'list':
+                    print("\nListing files...")
+                    # Run the list files task
                     inputs = {
                         "folder_path": folder_path,
-                        "question": files_question
+                        "question": "List all files in the directory"
                     }
                     result = crew_instance.kickoff(inputs=inputs)
-                    print(f"\nFiles in {folder_path}:\n{result}")
+                    print("\nFiles in directory:")
+                    print(result)
                     continue
                     
-                # Regular question handling
-                if question.strip():
-                    # Determine if this is a data extraction query
-                    is_extraction_query = any(keyword in question.lower() for keyword in 
-                                           ['extract', 'list all', 'table', 'from all files', 
-                                           'across all', 'every file', 'all documents', 'payor name'])
-                    
-                    # Add context from previous conversation
-                    context = ""
-                    if conversation_history and len(conversation_history) > 0:
-                        context = "Based on our previous conversation, "
-                    
-                    # Ensure the question is specific
-                    if len(question.strip()) < 15 and not is_extraction_query:
-                        print("\nPlease provide a more specific question for better results.")
-                        continue
-                        
+                elif user_input.lower() == 'process':
+                    print("\nProcessing files...")
+                    # Run the process files task
                     inputs = {
                         "folder_path": folder_path,
-                        "question": question
+                        "question": "Process all files in the directory"
                     }
+                    result = crew_instance.kickoff(inputs=inputs)
+                    print("\nFile processing results:")
+                    print(result)
+                    files_processed = True
+                    continue
                     
-                    print("\nProcessing your question...")
-                    results = crew_instance.kickoff(inputs=inputs)
+                elif user_input.lower().startswith('extract'):
+                    # Parse extraction type
+                    parts = user_input.split()
+                    extraction_type = "all"
+                    if len(parts) > 1:
+                        extraction_type = parts[1].lower()
+                        
+                    print(f"\nExtracting {extraction_type} data...")
+                    # Run the extract data task
+                    inputs = {
+                        "folder_path": folder_path,
+                        "question": f"Extract {extraction_type} data from all documents",
+                        "extraction_type": extraction_type
+                    }
+                    result = crew_instance.kickoff(inputs=inputs)
+                    print("\nExtracted data:")
+                    print(result)
+                    continue
+                
+                # Treat any other input as a question
+                if user_input.strip():
+                    print("\nAnswering your question...")
+                    # If files haven't been processed yet, recommend doing so
+                    if not files_processed:
+                        print("Note: Files have not been processed yet. Processing now...")
                     
-                    # Store conversation for context
-                    conversation_history.append({"question": question, "answer": results})
+                    # Answer the question
+                    inputs = {
+                        "folder_path": folder_path,
+                        "question": user_input
+                    }
+                    result = crew_instance.kickoff(inputs=inputs)
+                    print("\nAnswer:")
+                    print(result)
                     
-                    # Format and display the result
-                    if isinstance(results, dict):
-                        print("\nFindings from your documents:")
-                        for task_id, result in results.items():
-                            if 'extraction' in task_id.lower():
-                                print("\n=== Extracted Data ===")
-                            else:
-                                print("\n=== General Analysis ===")
-                            print(result)
-                    else:
-                        print("\nAnswer:")
-                        print(results)
             except KeyboardInterrupt:
                 print("\nOperation interrupted. Type 'exit' to quit or ask another question.")
                 continue
             except Exception as e:
-                logger.error(f"Error processing your question: {e}")
+                logger.error(f"Error processing your request: {e}")
                 traceback.print_exc()
-                print("\nPlease try again with a different question.")
+                print(f"\nError: {str(e)}")
+                print("Please try again with a different command or question.")
                 
     except Exception as e:
         logger.error(f"Error initializing the chatbot: {e}")
         traceback.print_exc()
+        print(f"\nFatal error: {str(e)}")
 
 if __name__ == "__main__":
     run()
